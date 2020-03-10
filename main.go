@@ -11,7 +11,10 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 
 	files, err := ioutil.ReadDir(".")
 	if err != nil {
-		return nil, err
+		return events.APIGatewayProxyResponse{
+			StatusCode: 500,
+			Body:       err.Error(),
+		}, err
 	}
 
 	buf := bytes.NewBuffer(nil)
