@@ -1,5 +1,7 @@
 build:
-	mkdir -p functions/hello-lambda
+	mkdir -p functions
 	go get ./...
-	go build -o functions/hello-lambda/hello-lambda ./...
-	echo "test" > functions/hello-lambda/foo.txt
+	go build -o functions/hello-lambda ./...
+	mkdir -p functions/data
+	cp data.js functions/data/
+	echo "raw data" > functions/data/data.txt
