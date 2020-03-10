@@ -1,14 +1,29 @@
 package main
 
 import (
+	"bytes"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
+	"io/ioutil"
 )
 
 func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+
+	files, err := ioutil.ReadDir(".")
+	if err != nil {
+		return nil, err
+	}
+
+	buf := bytes.NewBuffer(nil)
+
+
+	for _, file := range files {
+		buf.WriteString(file.Name() + "\n")
+	}
+
 	return events.APIGatewayProxyResponse{
 		StatusCode: 200,
-		Body:       "Hello AWS Lambda and Netlify Marty",
+		Body:       "Hello AWS Lambda and Netlify Marty\n" + buf.String(),
 	}, nil
 }
 
