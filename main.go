@@ -8,7 +8,7 @@ import (
 func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	return events.APIGatewayProxyResponse{
 		StatusCode: 200,
-		Body:       "Hello AWS Lambda and Netlify",
+		Body:       "Hello AWS Lambda and Netlify Marty",
 	}, nil
 }
 
