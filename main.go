@@ -9,7 +9,7 @@ import (
 
 func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
-	files, err := ioutil.ReadDir(".")
+	files, err := ioutil.ReadDir("../data")
 	if err != nil {
 		return events.APIGatewayProxyResponse{
 			StatusCode: 500,
