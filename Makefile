@@ -1,5 +1,5 @@
 build:
-    pwd
+	pwd
 	mkdir -p functions
 	cd funcsrc/hello-lambda
 	pwd
