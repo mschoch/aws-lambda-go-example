@@ -1,7 +1,5 @@
-# Deploying AWS Lambda Go functions with Netlify
+## Bluge Labs Website
 
-This is an example of how to deploy Go functions with Netlify on AWS Lambda.
+The [website](https://blugelabs.com/) is built using [Hugo](https://gohugo.io/) and deployed/hosted by [Netlify](https://www.netlify.com/).
 
-You can find the code in [main.go](main.go).
-
-Read more about Go functions support on Netlify in [our documentation](https://www.netlify.com/docs/lambda-functions).
+[![Netlify Status](https://api.netlify.com/api/v1/badges/682ed6af-8665-4ea2-85e7-80be0af58dd9/deploy-status)](https://app.netlify.com/sites/blugelabs/deploys)

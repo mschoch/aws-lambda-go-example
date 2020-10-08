@@ -1,0 +1,51 @@
+baseURL = "https://blugelabs.com/"
+languageCode = "en-us"
+title = "Bluge Labs"
+theme = "beautifulhugo"
+
+[params]
+  Author = "Bluge Labs, LLC."
+  avatar = "avatar.png"
+  favicon = "img/favicon.ico"
+  logo = "img/avatar.png"
+
+ [Author]
+   name = "Bluge Labs, LLC."
+   twitter = "blugelabs"
+   github = "blugelabs"
+
+[menu]
+
+  [[menu.main]]
+    identifier = "bluge"
+    name = "bluge"
+    pre = "<i class='fa fa-heart'></i>"
+    url = "/bluge/"
+    weight = -130
+
+  [[menu.main]]
+    identifier = "blog"
+    name = "blog"
+    pre = "<i class='fa fa-heart'></i>"
+    url = "/blog/"
+    weight = -120
+
+  [[menu.main]]
+    identifier = "thanks"
+    name = "thanks"
+    pre = "<i class='fa fa-heart'></i>"
+    url = "/thanks/"
+    weight = -110
+
+  [[menu.main]]
+    identifier = "about"
+    name = "about"
+    pre = "<i class='fa fa-heart'></i>"
+    url = "/about/"
+    weight = -100
+
+[markup.goldmark.renderer]
+unsafe= true
+
+[outputs]
+  page = ["HTML", "JSON"]
