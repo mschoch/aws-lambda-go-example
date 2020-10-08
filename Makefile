@@ -1,4 +1,6 @@
-all: functions-with-index
+all: build
+
+build: functions-with-index
 
 public:
 	hugo
