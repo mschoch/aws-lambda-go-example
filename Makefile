@@ -11,6 +11,8 @@ site-index: public bluge_index_dir_exec
 
 bluge_index_dir_exec:
 	@echo "installing bluge_index_dir"
+	go env
+	ls $(GOPATH)/bin
 	cd bluge_index_dir; go install
 
 functions-with-index: site-index bluge_add_to_elf
