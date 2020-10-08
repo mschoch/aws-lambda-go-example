@@ -7,17 +7,17 @@ public:
 
 site-index: public bluge_index_dir_exec
 	@echo "building site index"
-	bluge_index_dir public site_index.bluge
+	bluge_index_dir/bluge_index_dir public site_index.bluge
 
 bluge_index_dir_exec:
 	@echo "installing bluge_index_dir"
 	go env
 	ls $(GOPATH)/bin
-	cd bluge_index_dir; go install
+	cd bluge_index_dir; go build
 
 functions-with-index: site-index bluge_add_to_elf
 	@echo "functions with index"
-	bluge_add_to_elf functions/site-search index site_index.bluge
+	./bluge_add_to_elf functions/site-search index site_index.bluge
 	mv functions/site-search.withindex functions/site-search
 
 functions:
@@ -27,7 +27,7 @@ functions:
 
 bluge_add_to_elf: functions
 	@echo "add to elf"
-	go get github.com/blugelabs/bluge_directory_elf/cmd/bluge_add_to_elf
+	GOBIN=`pwd` go get github.com/blugelabs/bluge_directory_elf/cmd/bluge_add_to_elf
 
 clean:
 	-rm -rf public functions site_index.bluge
