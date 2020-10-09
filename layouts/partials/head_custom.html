@@ -16,3 +16,7 @@
           padding-top: 10px;
       }
     </style>
+
+    {{if eq .Title "Search"}}
+        {{partial "head_search.html"}}
+    {{end}}
