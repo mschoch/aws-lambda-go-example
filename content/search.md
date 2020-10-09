@@ -26,6 +26,7 @@ title: "Search"
             </div>
 {{log .}}
 {{log hits}}
+{{log query}}
         </div>
     </nav>
     {{/if}}

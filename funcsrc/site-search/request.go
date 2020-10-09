@@ -2,12 +2,14 @@ package main
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/blugelabs/bluge"
 	querystr "github.com/blugelabs/query_string"
 )
 
 const resultsPerPage = 10
+const roundDurationTo = 500 * time.Microsecond
 
 type Filter struct {
 	Name  string `json:"name"`

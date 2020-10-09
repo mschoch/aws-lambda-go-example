@@ -46,6 +46,7 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	if err != nil {
 		return internalError(fmt.Errorf("error processing bluge response: %v", err))
 	}
+	searchResponse.AddPaging(dmi.Aggregations(), searchRequest.Page)
 
 	responseBytes, err := json.Marshal(searchResponse)
 	if err != nil {

@@ -1,12 +1,14 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/blugelabs/bluge/search"
+	"math"
 )
 
 type DocumentMatch struct {
-	Document interface{}         `json:"document"`
+	Document json.RawMessage         `json:"document"`
 	Score    float64             `json:"score"`
 	Expl     *search.Explanation `json:"explanation"`
 	ID       string              `json:"id"`
@@ -50,11 +52,16 @@ func NewSearchResponse(query string, dmi search.DocumentMatchIterator) (*SearchR
 			if field == "_id" {
 				dm.ID = string(value)
 			}
+			if field == "_source" {
+				dm.Document = append(dm.Document, value...)
+			}
 			return true
 		})
 		if err != nil {
 			return nil, fmt.Errorf("error visiting stored fields: %v", err)
 		}
+		dm.Score = next.Score
+		dm.Expl = next.Explanation
 		rv.Hits = append(rv.Hits, &dm)
 		next, err = dmi.Next()
 	}
@@ -62,5 +69,25 @@ func NewSearchResponse(query string, dmi search.DocumentMatchIterator) (*SearchR
 		return nil, fmt.Errorf("error iterating matches: %v", err)
 	}
 
+	rv.Total = dmi.Aggregations().Count()
+	rv.TopScore = dmi.Aggregations().Metric("max_score")
+	rv.Duration = dmi.Aggregations().Duration().String()
+
 	return rv, nil
+}
+
+func (s *SearchResponse) AddPaging(aggs *search.Bucket, page int) {
+	numPages := int(math.Ceil(float64(aggs.Count()) / float64(resultsPerPage)))
+	if numPages > page {
+		s.NextPage = page + 1
+	}
+	if page != 1 {
+		s.PreviousPage = page - 1
+	}
+
+	if page != 1 {
+		s.Message = fmt.Sprintf("Page %d of ", page)
+	}
+	s.Message += fmt.Sprintf("%d results (%s)", aggs.Count(),
+		aggs.Duration().Round(roundDurationTo))
 }
