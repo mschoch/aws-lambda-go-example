@@ -22,9 +22,11 @@ title: "Search"
     <nav class="level">
         <div class="level-left">
             <div class="level-item">
-                <h3 class="title is-3">No Results</h3>
-                {{hits}}
+                <h3 class="title is-3">NoNo Results</h3>
             </div>
+                    {{#each hits as |hit|}}
+                        {{> searchResultTmpl hit}}
+                    {{/each}}
         </div>
     </nav>
     {{/if}}
