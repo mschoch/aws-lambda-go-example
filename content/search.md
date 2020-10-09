@@ -23,6 +23,7 @@ title: "Search"
         <div class="level-left">
             <div class="level-item">
                 <h3 class="title is-3">No Results</h3>
+                {{hits}}
             </div>
         </div>
     </nav>
@@ -102,7 +103,7 @@ title: "Search"
 <div class="content column is-half is-offset-one-quarter" style="margin-top: 30px">
 <div class="control has-icons-left">
 
-<input id="query" name="q" class="input is-medium" type="search" placeholder="Search beers and breweries" name="Search">
+<input id="query" name="q" class="input is-medium" type="search" placeholder="Search" name="Search">
     <span class="icon is-medium is-left" style="cursor: pointer">
           <i class="fa fa-search"></i>
     </span>
