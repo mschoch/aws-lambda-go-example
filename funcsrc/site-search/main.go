@@ -44,7 +44,7 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 		return internalError(fmt.Errorf("error executing bluge search: %v", err))
 	}
 
-	searchResponse, err := NewSearchResponse(searchRequest.Query, dmi, highlighter)
+	searchResponse, err := NewSearchResponse(searchRequest.Query, dmi, highlighter, &searchRequest)
 	if err != nil {
 		return internalError(fmt.Errorf("error processing bluge response: %v", err))
 	}

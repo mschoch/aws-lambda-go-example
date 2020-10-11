@@ -47,7 +47,7 @@ type SearchResponse struct {
 }
 
 func NewSearchResponse(query string, dmi search.DocumentMatchIterator,
-	highlighter *highlight.SimpleHighlighter) (*SearchResponse, error) {
+	highlighter *highlight.SimpleHighlighter, searchRequest *SearchRequest) (*SearchResponse, error) {
 	rv := &SearchResponse{
 		Query: query,
 	}
@@ -86,9 +86,7 @@ func NewSearchResponse(query string, dmi search.DocumentMatchIterator,
 		return nil, fmt.Errorf("error iterating matches: %v", err)
 	}
 
-	rv.Total = dmi.Aggregations().Count()
-	rv.TopScore = dmi.Aggregations().Metric("max_score")
-	rv.Duration = dmi.Aggregations().Duration().String()
+	rv.AddAggregations(dmi.Aggregations(), searchRequest.Filters)
 
 	return rv, nil
 }
@@ -107,4 +105,44 @@ func (s *SearchResponse) AddPaging(aggs *search.Bucket, page int) {
 	}
 	s.Message += fmt.Sprintf("%d results (%s)", aggs.Count(),
 		aggs.Duration().Round(roundDurationTo))
+}
+
+func (s *SearchResponse) AddAggregations(aggs *search.Bucket, filters []*Filter) {
+	s.Total = aggs.Count()
+	s.TopScore = aggs.Metric("max_score")
+	s.Duration = aggs.Duration().String()
+
+	s.Aggregations = make(map[string]*Aggregation)
+	s.buildAggregation(aggs, "type", filters)
+}
+
+func (s *SearchResponse) buildAggregation(aggs *search.Bucket, name string, filters []*Filter) {
+	agg := &Aggregation{
+		DisplayName: displayName(name),
+		FilterName:  name,
+	}
+
+	for _, bucket := range aggs.Buckets(name) {
+		aggVal := &AggregationValue{
+			DisplayName: displayName(bucket.Name()),
+			FilterName:  bucket.Name(),
+			Count:       bucket.Count(),
+		}
+		for _, f := range filters {
+			if f.Name == name && f.Value == bucket.Name() {
+				aggVal.Filtered = true
+			}
+		}
+		agg.Values = append(agg.Values, aggVal)
+	}
+
+	s.Aggregations[name] = agg
+}
+
+func displayName(in string) string {
+	switch in {
+	case "type":
+		return "Type"
+	}
+	return in
 }

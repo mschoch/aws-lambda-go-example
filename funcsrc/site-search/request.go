@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"github.com/blugelabs/bluge/search"
+	"github.com/blugelabs/bluge/search/aggregations"
 	"time"
 
 	"github.com/blugelabs/bluge"
@@ -23,6 +25,13 @@ type SearchRequest struct {
 }
 
 func (r *SearchRequest) buildFilterClauses() (rv []bluge.Query) {
+	for _, filter := range r.Filters {
+		switch filter.Name {
+		case "type":
+			rv = append(rv, bluge.NewTermQuery(filter.Value).SetField(filter.Name))
+		}
+	}
+
 	return rv
 }
 
@@ -53,6 +62,8 @@ func (r *SearchRequest) BlugeRequest() (bluge.SearchRequest, error) {
 		WithStandardAggregations().
 		SetFrom(offset).
 		ExplainScores()
+
+	blugeRequest.AddAggregation("type", aggregations.NewTermsAggregation(search.Field("type"), 5))
 
 	return blugeRequest, nil
 }
