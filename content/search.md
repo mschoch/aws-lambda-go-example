@@ -24,9 +24,6 @@ title: "Search"
             <div class="level-item">
                 <h3 class="title is-3">No Results</h3>
             </div>
-{{log .}}
-{{log hits}}
-{{log query}}
         </div>
     </nav>
     {{/if}}
@@ -43,9 +40,9 @@ title: "Search"
     {{> resultTmpl }}
 </script>
 <script id="resultTmpl" type="text/x-handlebars-template">
-    <div class="box">
+    <div class="well">
         <strong>{{document.title}}</strong>
-        <button type="button" class="tag is-dark is-pulled-right" onclick="return toggleScore('{{id}}')">{{roundScore score}}</button>
+        <button type="button" class="badge is-dark is-pulled-right" onclick="return toggleScore('{{id}}')">{{roundScore score}}</button>
         <p>{{document.content}}</p>
         <div id="score-{{id}}" style="display:none">
             <strong>Score Explanation</strong>
@@ -101,18 +98,11 @@ title: "Search"
 <form action="/search" method="get" id="searchForm">
 <input id="page" name="p" value="1" type="hidden"/>
 
-<!--<div class="content column is-three-fifths is-offset-one-fifth" style="margin-top: 30px">-->
-<div class="content column is-half is-offset-one-quarter" style="margin-top: 30px">
-<div class="control has-icons-left">
-
-<input id="query" name="q" class="input is-medium" type="search" placeholder="Search" name="Search">
-    <span class="icon is-medium is-left" style="cursor: pointer">
-          <i class="fa fa-search"></i>
-    </span>
-
-
-</div>
-</div>
+<span class="input-group-btn">
+    <button id="searchButton" class="btn btn-info btn-lg" type="submit">
+        <i class="glyphicon glyphicon-search"></i>
+    </button>
+</span>
 
 <div class="column is-half is-offset-one-quarter">
     <div class="columns">
