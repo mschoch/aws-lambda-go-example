@@ -9,7 +9,7 @@ type: search
                 <h3>Results</h3>
             </div>
             <div class="col-lg-9">
-                {{message}}
+                <br/>{{message}}
             </div>
         </div>
         {{#each hits as |hit|}}
