@@ -77,8 +77,8 @@ type: search
         <strong>{{display_name}}</strong>
         {{#each values as |value|}}
             {{#if value.count}}
-            <div class="field">
-                <label class="checkbox">
+            <div class="checkbox">
+                <label>
                     {{#if value.filtered}}
                     <input name="f_{{../filter_name}}" value="{{value.filter_name}}" checked type="checkbox" onclick="resubmit()" style="vertical-align: middle;">
                     {{else}}
