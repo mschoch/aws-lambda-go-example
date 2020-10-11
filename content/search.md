@@ -107,15 +107,12 @@ type: search
     </div>
 </div>
 
-<div class="column is-half is-offset-one-quarter">
-    <div class="columns">
-        <div id="searchResultsArea" class="column is-three-quarters">
 
-</div>
-<div id="aggregationsArea" class="column is-one-quarter">
-
-</div>
-</div>
+<div class="row">
+    <div id="searchResultsArea" class="col-lg-9">
+    </div>
+    <div id="aggregationsArea" class="col-lg-3">
+    </div>
 </div>
 
 </form>
