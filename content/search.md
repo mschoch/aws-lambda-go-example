@@ -4,14 +4,12 @@ type: search
 ---
 <script id="searchResultsTmpl" type="text/x-handlebars-template">
     {{#if hits}}
-        <nav class="level">
-            <div>
-                    <h3 class="title is-3">Results</h3>
-                    <div class="level-item">
-                        <span class="label label-default pull-right">{{message}}</span>
-                    </div>
+        <div>
+            <h3 class="title is-3">Results</h3>
+            <div class="level-item">
+                <span class="label label-default pull-right">{{message}}</span>
             </div>
-        </nav>
+        </div>
         {{#each hits as |hit|}}
             {{> searchResultTmpl hit}}
         {{/each}}
