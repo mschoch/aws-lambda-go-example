@@ -49,6 +49,7 @@ func (r *SearchRequest) BlugeRequest() (bluge.SearchRequest, error) {
 		AddMust(filters...)
 
 	blugeRequest := bluge.NewTopNSearch(size, q).
+		IncludeLocations().
 		WithStandardAggregations().
 		SetFrom(offset).
 		ExplainScores()
