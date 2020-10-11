@@ -12,7 +12,7 @@ type: search
             </div>
             <div class="level-right">
                 <div class="level-item">
-                    <span class="tag is-info is-light">{{message}}</span>
+                    <span class="badge is-info is-light pull-right">{{message}}</span>
                 </div>
             </div>
         </nav>
