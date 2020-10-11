@@ -24,13 +24,15 @@ type: search
         </div>
     </nav>
     {{/if}}
-    <div class="content column is-one-fifth is-offset-two-fifths">
-        {{#if previousPage}}
-        <button type="button" class="button is-small" onclick="jumpToPage({{previousPage}})">&laquo; Previous</button>
-        {{/if}}
-        {{#if nextPage}}
-        <button type="button" class="button is-small" onclick="jumpToPage({{nextPage}})">Next &raquo;</button>
-        {{/if}}
+    <div class="row">
+        <div class="col-lg-2 col-lg-offset-5">
+            {{#if previousPage}}
+            <button type="button" class="btn btn-sm" onclick="jumpToPage({{previousPage}})">&laquo; Previous</button>
+            {{/if}}
+            {{#if nextPage}}
+            <button type="button" class="btn btn-sm" onclick="jumpToPage({{nextPage}})">Next &raquo;</button>
+            {{/if}}
+        </div>
     </div>
 </script>
 <script id="searchResultTmpl" type="text/x-handlebars-template">
