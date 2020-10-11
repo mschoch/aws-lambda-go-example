@@ -73,7 +73,7 @@ type: search
     {{/if}}
 </script>
 <script id="aggregationTmpl" type="text/x-handlebars-template">
-    <div class="box">
+    <div class="well">
         <strong>{{display_name}}</strong>
         {{#each values as |value|}}
             {{#if value.count}}
@@ -84,7 +84,7 @@ type: search
                     {{else}}
                     <input name="f_{{../filter_name}}" value="{{value.filter_name}}" type="checkbox" onclick="resubmit()" style="vertical-align: middle;">
                     {{/if}}
-                    <span class="is-size-7" style="vertical-align: middle;">{{value.display_name}} ({{value.count}})</span>
+                    <small> style="vertical-align: middle;">{{value.display_name}} ({{value.count}})</small>
                 </label>
             </div>
             {{/if}}
