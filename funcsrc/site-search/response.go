@@ -143,6 +143,12 @@ func displayName(in string) string {
 	switch in {
 	case "type":
 		return "Type"
+	case "blog":
+		return "Blog"
+	case "page":
+		return "Page"
+	case "bluge":
+		return "Bluge Docs"
 	}
 	return in
 }

@@ -84,7 +84,7 @@ type: search
                     {{else}}
                     <input name="f_{{../filter_name}}" value="{{value.filter_name}}" type="checkbox" onclick="resubmit()" style="vertical-align: middle;">
                     {{/if}}
-                    <small style="vertical-align: middle;">{{value.display_name}} ({{value.count}})</small>
+                    <small style="vertical-align: top;">{{value.display_name}} ({{value.count}})</small>
                 </label>
             </div>
             {{/if}}
