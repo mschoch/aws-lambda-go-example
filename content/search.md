@@ -97,8 +97,8 @@ title: "Search"
 
 <form action="/search" method="get" id="searchForm">
 <input id="page" name="p" value="1" type="hidden"/>
-<input id="query" name="q" type="text" class="form-control input-lg" placeholder="Search" />
 <span class="input-group-btn">
+    <input id="query" name="q" type="text" class="form-control input-lg" placeholder="Search" />
     <button id="searchButton" class="btn btn-lg" type="submit">
         <i class="glyphicon glyphicon-search"></i>
     </button>
