@@ -5,15 +5,11 @@ type: search
 <script id="searchResultsTmpl" type="text/x-handlebars-template">
     {{#if hits}}
         <nav class="level">
-            <div class="level-left">
-                <div class="level-item">
+            <div>
                     <h3 class="title is-3">Results</h3>
-                </div>
-            </div>
-            <div class="level-right">
-                <div class="level-item">
-                    <span class="label label-default pull-right">{{message}}</span>
-                </div>
+                    <div class="level-item">
+                        <span class="label label-default pull-right">{{message}}</span>
+                    </div>
             </div>
         </nav>
         {{#each hits as |hit|}}
