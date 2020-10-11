@@ -1,14 +1,21 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"github.com/blugelabs/bluge/search"
+	"github.com/blugelabs/bluge/search/highlight"
 	"math"
+
+	"github.com/blugelabs/bluge/search"
 )
 
+type Document struct {
+	Title   string `json:"title"`
+	Content string `json:"content"`
+	Type    string `json:"type"`
+}
+
 type DocumentMatch struct {
-	Document json.RawMessage         `json:"document"`
+	Document Document     `json:"document"`
 	Score    float64             `json:"score"`
 	Expl     *search.Explanation `json:"explanation"`
 	ID       string              `json:"id"`
@@ -39,8 +46,8 @@ type SearchResponse struct {
 	NextPage     int                     `json:"nextPage,omitempty"`
 }
 
-
-func NewSearchResponse(query string, dmi search.DocumentMatchIterator) (*SearchResponse, error) {
+func NewSearchResponse(query string, dmi search.DocumentMatchIterator,
+	highlighter *highlight.SimpleHighlighter) (*SearchResponse, error) {
 	rv := &SearchResponse{
 		Query: query,
 	}
@@ -51,9 +58,19 @@ func NewSearchResponse(query string, dmi search.DocumentMatchIterator) (*SearchR
 		err = next.VisitStoredFields(func(field string, value []byte) bool {
 			if field == "_id" {
 				dm.ID = string(value)
-			}
-			if field == "_source" {
-				dm.Document = append(dm.Document, value...)
+			} else if field == "title" {
+				dm.Document.Title = string(value)
+			} else if field == "content" {
+				dm.Document.Content = string(value)
+				if contentLocations, ok := next.Locations["content"]; ok {
+					fragment := highlighter.BestFragment(contentLocations, value)
+					if len(fragment) > 0 {
+						dm.Document.Content = fragment
+					}
+				}
+
+			} else if field == "type" {
+				dm.Document.Type = string(value)
 			}
 			return true
 		})

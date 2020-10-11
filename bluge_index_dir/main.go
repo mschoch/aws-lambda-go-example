@@ -83,8 +83,7 @@ func readParseMapPage(path string) (*bluge.Document, error) {
 		AddField(bluge.NewTextField("title", page.Title).StoreValue()).
 		AddField(bluge.NewKeywordField("type", page.Type).StoreValue().Aggregatable()).
 		AddField(bluge.NewTextField("content", html.UnescapeString(page.Content)).StoreValue()).
-		AddField(bluge.NewStoredOnlyField("_source", pageBytes)).
-		AddField(bluge.NewCompositeFieldExcluding("_all", []string{"_id", "_source"}))
+		AddField(bluge.NewCompositeFieldExcluding("_all", []string{"_id"}))
 
 	pageDate, err := time.Parse(time.RFC3339, page.Date)
 	if err == nil && !pageDate.IsZero() {

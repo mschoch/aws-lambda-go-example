@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/blugelabs/bluge/search/highlight"
 	"log"
 	"os"
 
@@ -16,6 +17,7 @@ import (
 )
 
 var reader *bluge.Reader
+var highlighter *highlight.SimpleHighlighter
 
 func internalError(err error) (events.APIGatewayProxyResponse, error) {
 	return events.APIGatewayProxyResponse{
@@ -42,7 +44,7 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 		return internalError(fmt.Errorf("error executing bluge search: %v", err))
 	}
 
-	searchResponse, err := NewSearchResponse(searchRequest.Query, dmi)
+	searchResponse, err := NewSearchResponse(searchRequest.Query, dmi, highlighter)
 	if err != nil {
 		return internalError(fmt.Errorf("error processing bluge response: %v", err))
 	}
@@ -72,6 +74,8 @@ func main() {
 	if err != nil {
 		log.Fatalf("error opening index reader: %v", err)
 	}
+
+	highlighter = highlight.NewHTMLHighlighter()
 
 	// Make the handler available for Remote Procedure Call by AWS Lambda
 	lambda.Start(handler)
