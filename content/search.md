@@ -40,10 +40,10 @@ type: search
 </script>
 <script id="resultTmpl" type="text/x-handlebars-template">
     <div class="well">
-        <a href="{{toHTMLID id}}">{{document.title}}</a>
+        <a href="{{id}}">{{document.title}}</a>
         <button type="button" class="badge is-dark is-pulled-right" onclick="return toggleScore('{{toHTMLID id}}')">{{roundScore score}}</button>
         <p>{{{document.content}}}</p>
-        <div id="score-{{id}}" style="display:none">
+        <div id="score-{{toHTMLID id}}" style="display:none">
             <strong>Score Explanation</strong>
             <ul class="tree">
                 {{> searchResultExplanationTmpl explanation}}
