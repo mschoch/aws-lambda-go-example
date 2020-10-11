@@ -44,7 +44,7 @@ type: search
     <div class="well">
         <strong>{{document.title}}</strong>
         <button type="button" class="badge is-dark is-pulled-right" onclick="return toggleScore('{{id}}')">{{roundScore score}}</button>
-        <p>{{document.content}}</p>
+        <p>{{{document.content}}}</p>
         <div id="score-{{id}}" style="display:none">
             <strong>Score Explanation</strong>
             <ul class="tree">
