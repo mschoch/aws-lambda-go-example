@@ -1,5 +1,6 @@
 ---
 title: "Search"
+type: search
 ---
 <script id="searchResultsTmpl" type="text/x-handlebars-template">
     {{#if hits}}
