@@ -97,12 +97,14 @@ title: "Search"
 
 <form action="/search" method="get" id="searchForm">
 <input id="page" name="p" value="1" type="hidden"/>
-<span class="input-group-btn">
+<div class="input-group">
     <input id="query" name="q" type="text" class="form-control input-lg" placeholder="Search" />
-    <button id="searchButton" class="btn btn-lg" type="submit">
-        <i class="glyphicon glyphicon-search"></i>
-    </button>
-</span>
+    <div class="input-group-btn">
+        <button id="searchButton" class="btn btn-lg" type="submit">
+            <i class="glyphicon glyphicon-search"></i>
+        </button>
+    </div>
+</div>
 
 <div class="column is-half is-offset-one-quarter">
     <div class="columns">
