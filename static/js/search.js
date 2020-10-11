@@ -138,8 +138,9 @@ function toggleScore(id, e) {
     if (e) {
         e.preventDefault();
     }
-    console.log("toggling", id);
+    console.log("toggling", "$Score-"+id);
     $("#score-"+id).toggle();
+    console.log("toggled it")
     return false;
 }
 
