@@ -4,9 +4,11 @@ type: search
 ---
 <script id="searchResultsTmpl" type="text/x-handlebars-template">
     {{#if hits}}
-        <div>
-            <h3 class="title is-3">Results</h3>
-            <div class="level-item">
+        <div class="row">
+            <div class="col-lg-3">
+                <h3>Results</h3>
+            </div>
+            <div class="col-lg-9">
                 <span class="label label-default pull-right">{{message}}</span>
             </div>
         </div>
