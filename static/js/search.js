@@ -35,9 +35,12 @@ $(document).ready(function () {
     var searchResultsTmpl = Handlebars.compile($('#searchResultsTmpl').html());
     var aggregationsTmpl = Handlebars.compile($('#aggregationsTmpl').html());
 
-
     Handlebars.registerHelper('roundScore', function(number) {
         return roundScore(number);
+    });
+
+    Handlebars.registerHelper('toHTMLID', function(id) {
+        return toHTMLID(id);
     });
 
     $("#searchForm").submit(function() {
@@ -142,4 +145,8 @@ function toggleScore(id, e) {
 
 function roundScore(score) {
     return Math.round(score*1000)/1000;
+}
+
+function toHTMLID(id) {
+    return id.replace("/", "_");
 }
