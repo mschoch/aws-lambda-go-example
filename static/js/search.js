@@ -148,5 +148,5 @@ function roundScore(score) {
 }
 
 function toHTMLID(id) {
-    return id.replace("/", "_");
+    return id.replace(/\//g, "_");
 }
