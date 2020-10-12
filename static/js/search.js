@@ -149,6 +149,6 @@ function roundScore(score) {
 }
 
 function toHTMLID(id) {
-    id.replace("https://blugelabs.com/", "");
+    id = id.replace("https://blugelabs.com/", "");
     return id.replace(/\//g, "_");
 }
